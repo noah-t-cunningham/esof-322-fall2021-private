@@ -29,8 +29,26 @@ public class Ski {
     }
 
     public static class SkiBuilder {
+        private int length;
+        private String brand;
+        private String name;
+
+        public Ski.SkiBuilder withLength(int length) {
+            this.length = length;
+            return this;
+        }
+        public Ski.SkiBuilder withName(String name) {
+            this.name = name;
+            return this;
+        }
+        public Ski.SkiBuilder withBrand(String brand) {
+            this.brand = brand;
+            return this;
+        }
         public Ski build() {
-            return null;
+            return new Ski(length, name, brand);
         }
     }
+
 }
+
