@@ -1,5 +1,5 @@
 package edu.montana.esof322.homework.homework1;
-//edit
+
 public class Ski {
 
     private int length;
