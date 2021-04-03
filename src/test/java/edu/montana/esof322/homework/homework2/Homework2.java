@@ -7,15 +7,44 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class Homework2 {
 
-    int invocationCount = 0;
-    StringBuilder output = new StringBuilder();
+    static int invocationCount = 0;
+    static StringBuilder output = new StringBuilder();
 
-    class ThingDoer {
-        void doIt() {
+    // I Create Interface IDoAThing
+    interface IDoAThing{
+        void doIt();
+    }
+
+    static class ThingDoer implements IDoAThing{
+        public void doIt() {
             output.append("Did it!\n");
         }
     }
 
+    //create factory
+    private static class ThingDoer_factory {
+        public static IDoAThing create(){
+            ThingDoer_proxy thingDoer = new ThingDoer_proxy(new ThingDoer());
+            return thingDoer;
+        }
+    }
+
+    static class ThingDoer_proxy implements IDoAThing{
+        IDoAThing _proxied_object;
+
+        public ThingDoer_proxy(IDoAThing proxied_object) {
+            _proxied_object = proxied_object;
+        }
+
+        @Override
+        public void doIt() {
+            output.append("Did it!\n");
+            invocationCount++;
+        }
+    }
+    public void make_ThingDoer_proxy() {
+        IDoAThing proxy = new ThingDoer_proxy(new ThingDoer());
+    }
     //=======================================================================
     // Your boss wants to know how many times a method on a given class is
     // being invoked.  Your job is to take the the code above and refactor it
@@ -26,12 +55,16 @@ public class Homework2 {
         // Step 1: extract an interface for ThingDoer, IDoAThing and
         //         replace the variable below with
 
+        IDoAThing idat = new ThingDoer();
+
         // Step 2: replace this new expression with a factory to produce
         //         IDoAThings
-        ThingDoer thingDoer = new ThingDoer();
+        IDoAThing thingDoer = ThingDoer_factory.create();
 
         // Step 3: use the factory to insert a proxy object that wraps
         //         a ThingDoer and increments the invocationCount
+
+
         assertFalse(thingDoer instanceof ThingDoer);
 
         // do the thing a few times...
