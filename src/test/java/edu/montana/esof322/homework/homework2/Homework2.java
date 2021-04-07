@@ -22,6 +22,7 @@ public class Homework2 {
     }
 
     //create factory
+    // Java naming conventions would be ThingDoerFactory (no points off)
     private static class ThingDoer_factory {
         public static IDoAThing create(){
             ThingDoer_proxy thingDoer = new ThingDoer_proxy(new ThingDoer());
@@ -29,6 +30,7 @@ public class Homework2 {
         }
     }
 
+    // Java naming conventions would be ThingDoerProxy (no points off)
     static class ThingDoer_proxy implements IDoAThing{
         IDoAThing _proxied_object;
 
