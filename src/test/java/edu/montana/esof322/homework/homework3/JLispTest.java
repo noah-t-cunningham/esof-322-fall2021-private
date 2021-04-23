@@ -39,4 +39,40 @@ public class JLispTest {
         assertEquals("Foo", "Bar");
     }
 
+    @Test
+    public void throws_illegal_argument_excpetion_with_null_input() {
+        JLisp jlisp = new JLisp();
+        try{
+            jlisp.eval(null);
+            fail("Didnt Throw");
+        }catch(IllegalArgumentException illegalArgumentException) { }
+    }
+
+    @Test
+    public void input_does_not_start_with_parentheses() {
+        JLisp jlisp = new JLisp();
+        try{
+            jlisp.eval( "+ 1 2)");
+            fail("Didnt Start With parentheses and didn't throw an IllegalArgumentException");
+        }catch(IllegalArgumentException illegalArgumentException) { }
+
+    }
+
+    @Test
+    public void does_JLisp_addition_work() {
+        JLisp jlisp = new JLisp();
+        Integer int_answer = jlisp.eval("(+ 1 (+2 3))");
+        assertEquals(6, int_answer);
+    }
+
+    @Test
+    public void input_has_to_many_arguments() {
+        JLisp jlisp = new JLisp();
+        try{
+            jlisp.eval("(+ 1 2 3)");
+            fail("Has More Than Two Arguments and didn't throw an IllegalArgumentException");
+        }catch(IllegalArgumentException illegalArgumentException) { }
+    }
 }
+
+
