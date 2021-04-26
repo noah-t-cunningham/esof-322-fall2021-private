@@ -40,6 +40,7 @@ public class JLispTest {
     }
 
     @Test
+    // java convention is camel case (no points off)
     public void throws_illegal_argument_excpetion_with_null_input() {
         JLisp jlisp = new JLisp();
         try{
